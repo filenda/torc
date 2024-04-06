@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "F4UjvTvKa65eKj0N3On3YQdlllNDWoWC/xJ1bRvUhBMBTOuwFAVQaYrI2eE0y6K4NBB1LrwRqpL76qP/5Fd2EA==",
+  "dgSpecHash": "r5/ZQpRsl8ZurpSEu93LSF7E/qGepj/GRG7L5AMWD6BCvpltQkroG5Oxb/aDc85yRNUI14L7N6kIVp7zEp8DIg==",
   "success": true,
   "projectFilePath": "C:\\Repos\\torc\\backend\\src\\BookLibraryApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\vinif\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\vinif\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.4\\microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512",
     "C:\\Users\\vinif\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.2\\microsoft.entityframeworkcore.6.0.2.nupkg.sha512",
     "C:\\Users\\vinif\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.2\\microsoft.entityframeworkcore.abstractions.6.0.2.nupkg.sha512",
