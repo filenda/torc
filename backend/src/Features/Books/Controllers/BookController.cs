@@ -21,6 +21,42 @@ namespace BookLibraryApi.Features.Books.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<List<BookDto>>> SearchBooks(
+            [FromQuery] string title,
+            [FromQuery] string author,
+            [FromQuery] string category,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10) // Default page and page size values
+        {
+            var searchCriteria = new BookSearchCriteria
+            {
+                Title = title,
+                Author = author,
+                Category = category
+            };
+
+            var searchOptions = new BookSearchOptions
+            {
+                Criteria = searchCriteria,
+                Page = page,
+                PageSize = pageSize
+            };
+
+            var paginatedBooks = await _bookService.SearchBooksAsync(searchOptions);
+            var bookDtos = _mapper.Map<List<BookDto>>(paginatedBooks.Items);
+
+            var paginationInfo = new
+            {
+                TotalItems = paginatedBooks.TotalItems,
+                TotalPages = paginatedBooks.TotalPages,
+                CurrentPage = paginatedBooks.CurrentPage,
+                PageSize = paginatedBooks.PageSize
+            };
+
+            return Ok(new { Books = bookDtos, Pagination = paginationInfo });
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<BookDto>>> GetBooks()
         {

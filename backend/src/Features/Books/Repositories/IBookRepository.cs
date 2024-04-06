@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using BookLibraryApi.Features.Books.DTOs;
 using BookLibraryApi.Features.Books.Models;
 
 namespace BookLibraryApi.Features.Books.Repositories
@@ -11,5 +10,6 @@ namespace BookLibraryApi.Features.Books.Repositories
     Task AddBookAsync(Book book);
     Task UpdateBookAsync(Book book);
     Task DeleteBookAsync(int id);
+    Task<PaginatedListDto<Book>> SearchBooksAsync(BookSearchOptions searchOptions);
   }
 }

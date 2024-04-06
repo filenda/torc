@@ -20,11 +20,11 @@ CREATE TABLE books (
 -- Create full-text search index for book title
 CREATE INDEX idx_book_title ON books USING gin(to_tsvector('english', title));
 
--- Create full-text search index for publisher
-CREATE INDEX idx_publisher ON books USING gin(to_tsvector('english', publisher));
+-- Add a new column for the author's full name
+ALTER TABLE books ADD COLUMN full_name VARCHAR(101) GENERATED ALWAYS AS (first_name || ' ' || last_name) STORED;
 
--- Create full-text search index for authors (assuming first_name and last_name are concatenated)
-CREATE INDEX idx_authors ON books USING gin(to_tsvector('english', CONCAT(first_name, ' ', last_name)));
+-- Create full-text search index for authors
+CREATE INDEX idx_authors ON books USING gin(to_tsvector('english', full_name));
 
 -- Create full-text search index for category
 CREATE INDEX idx_category ON books USING gin(to_tsvector('english', category));

@@ -16,9 +16,15 @@ namespace BookLibraryApi.Data
       base.OnModelCreating(modelBuilder);
 
       // Configure entity mappings or relationships here if needed
-      // For example:
-      // modelBuilder.Entity<Book>().ToTable("Books");
-      // modelBuilder.Entity<Book>().Property(b => b.Title).IsRequired();
+      modelBuilder.Entity<Book>().ToTable("books");
+      modelBuilder.Entity<Book>().Property(b => b.Id).HasColumnName("book_id").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.Title).HasColumnName("title").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.Author).HasColumnName("full_name").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.Category).HasColumnName("category").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.ISBN).HasColumnName("isbn").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.Type).HasColumnName("type").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.CopiesInUse).HasColumnName("copies_in_use").IsRequired();
+      modelBuilder.Entity<Book>().Property(b => b.TotalCopies).HasColumnName("total_copies").IsRequired();
     }
   }
 }

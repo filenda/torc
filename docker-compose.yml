@@ -2,8 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:latest
-    restart: always
+    image: postgres:15
     environment:
       POSTGRES_USER: your_username
       POSTGRES_PASSWORD: your_password
@@ -11,10 +10,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    command: >
-      sh -c "sleep 10 && psql -U your_username -d book_library_db -a -f /docker-entrypoint-initdb.d/init.sql"
-
+      - ~/.docker-conf/torc/db:/var/lib/postgresql/data    
+    # command: >
+    #       sh -c "sleep 10 && psql -h localhost -p 5432 -U your_username -d book_library_db -a -f /docker-entrypoint-initdb.d/init.sql"      
+    
   api:
     image: mcr.microsoft.com/dotnet/aspnet:7.0
     build:
@@ -27,17 +26,15 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=book_library_db;Username=your_username;Password=your_password"
 
-  frontend:
-    image: node:latest
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api
-    environment:
-      REACT_APP_API_URL: "http://api:80"
 
-volumes:
-  pgdata:
+  # frontend:
+  #   image: node:latest
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - api
+  #   environment:
+  #     REACT_APP_API_URL: "http://api:80"

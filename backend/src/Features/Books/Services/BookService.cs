@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BookLibraryApi.Features.Books.DTOs;
 using BookLibraryApi.Features.Books.Models;
 using BookLibraryApi.Features.Books.Repositories;
 
@@ -12,6 +13,11 @@ namespace BookLibraryApi.Features.Books.Services
         public BookService(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
+        }
+
+        public Task<PaginatedListDto<Book>> SearchBooksAsync(BookSearchOptions searchOptions)
+        {
+            return _bookRepository.SearchBooksAsync(searchOptions);
         }
 
         public async Task<List<Book>> GetAllBooksAsync()
