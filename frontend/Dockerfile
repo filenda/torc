@@ -1,8 +1,9 @@
-# Use the latest Node.js LTS version as a base image
-FROM node:latest AS build
+FROM node:latest
+
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY src/ ./
+
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
