@@ -23,9 +23,9 @@ namespace BookLibraryApi.Features.Books.Controllers
 
         [HttpGet("search")]
         public async Task<ActionResult<List<BookDto>>> SearchBooks(
-            [FromQuery] string title,
-            [FromQuery] string author,
-            [FromQuery] string category,
+            [FromQuery] string? title,
+            [FromQuery] string? author,
+            [FromQuery] string? category,
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10) // Default page and page size values
         {

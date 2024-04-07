@@ -55,20 +55,20 @@ namespace BookLibraryApi.Features.Books.Repositories
 
             if (!string.IsNullOrEmpty(searchOptions.Criteria.Title))
             {
-                var searchQuery = EF.Functions.ToTsQuery(searchOptions.Criteria.Title);
-                query = query.Where(b => EF.Functions.ToTsVector(b.Title).Matches(searchQuery));
+                var searchQuery = searchOptions.Criteria.Title;
+                query = query.Where(b => EF.Functions.ToTsVector("english", b.Title).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
             }
 
             if (!string.IsNullOrEmpty(searchOptions.Criteria.Author))
             {
-                var searchQuery = EF.Functions.ToTsQuery(searchOptions.Criteria.Author);
-                query = query.Where(b => EF.Functions.ToTsVector(b.Author).Matches(searchQuery));
+                var searchQuery = searchOptions.Criteria.Author;
+                query = query.Where(b => EF.Functions.ToTsVector("english", b.Author).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
             }
 
             if (!string.IsNullOrEmpty(searchOptions.Criteria.Category))
             {
-                query = query.Where(b => EF.Functions.ILike(b.Category, $"%{searchOptions.Criteria.Category}%"));
-                // query = query.Where(b => EF.Functions.Contains(b.Category, searchOptions.Criteria.Category));
+                var searchQuery = searchOptions.Criteria.Category;
+                query = query.Where(b => EF.Functions.ToTsVector("english", b.Category).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
             }
 
             var totalItems = await query.CountAsync();
