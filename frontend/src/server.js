@@ -15,8 +15,8 @@ app.get('/', (req, res) => {
 app.post('/search', async (req, res) => {
   try {
     const { searchField, searchQuery } = req.body;
-    // const response = await axios.get(`http://host.docker.internal:5000/api/books/search?${searchField}=${searchQuery}`);
-    const response = await axios.get(`http://localhost:5000/api/books/search?${searchField}=${searchQuery}`);
+    const response = await axios.get(`http://host.docker.internal:5000/api/books/search?${searchField}=${searchQuery}`);
+    // const response = await axios.get(`http://localhost:5000/api/books/search?${searchField}=${searchQuery}`);
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
