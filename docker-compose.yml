@@ -15,7 +15,7 @@ services:
     #       sh -c "sleep 10 && psql -h localhost -p 5432 -U your_username -d book_library_db -a -f /docker-entrypoint-initdb.d/init.sql"      
     
   api:
-    image: mcr.microsoft.com/dotnet/aspnet:7.0
+    image: torc-book-library
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -24,6 +24,7 @@ services:
     depends_on:
       - db
     environment:
+      # ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=book_library_db;Username=your_username;Password=your_password"
 
 
