@@ -7,15 +7,15 @@ EXPOSE 80
 # Use the latest version of the SDK for building the application
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["BookLibraryApi.csproj", "."]
+COPY ["src/BookLibraryApi.csproj", "."]
 RUN dotnet restore "./BookLibraryApi.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "BookLibraryApi.csproj" -c Release -o /app/build
+RUN dotnet build "./BookLibraryApi.csproj" -c Release -o /app/build
 
 # Publish the application
 FROM build AS publish
-RUN dotnet publish "BookLibraryApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "./BookLibraryApi.csproj" -c Release -o /app/publish
 
 # Final image
 FROM base AS final
