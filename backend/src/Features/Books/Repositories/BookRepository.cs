@@ -59,13 +59,13 @@ namespace BookLibraryApi.Features.Books.Repositories
                 query = query.Where(b => EF.Functions.ToTsVector("english", b.Title).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
             }
 
-            if (!string.IsNullOrEmpty(searchOptions.Criteria.Author))
+            else if (!string.IsNullOrEmpty(searchOptions.Criteria.Author))
             {
                 var searchQuery = searchOptions.Criteria.Author;
                 query = query.Where(b => EF.Functions.ToTsVector("english", b.Author).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
             }
 
-            if (!string.IsNullOrEmpty(searchOptions.Criteria.Category))
+            else if (!string.IsNullOrEmpty(searchOptions.Criteria.Category))
             {
                 var searchQuery = searchOptions.Criteria.Category;
                 query = query.Where(b => EF.Functions.ToTsVector("english", b.Category).Matches(EF.Functions.ToTsQuery("english", searchQuery)));
