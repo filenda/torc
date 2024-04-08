@@ -1,10 +1,9 @@
-namespace BookLibraryApi.Features.Books.Models
+using BookLibraryApi.Features.Books.DTOs;
+using MediatR;
+
+public class AddBookCommand : IRequest<BookDto>
 {
-  public class Book
-  {
-    public int Id { get; set; }
     public string Title { get; set; }
-    public string Author { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string ISBN { get; set; }
@@ -12,5 +11,4 @@ namespace BookLibraryApi.Features.Books.Models
     public string Category { get; set; }
     public int TotalCopies { get; set; }
     public int CopiesInUse { get; set; }
-  }
 }
