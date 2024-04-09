@@ -7,11 +7,13 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, BookD
 {
     private readonly IBookService _bookService;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
-    public UpdateBookCommandHandler(IBookService bookService, IMapper mapper)
+    public UpdateBookCommandHandler(IBookService bookService, IMapper mapper, IMediator mediator)
     {
         _bookService = bookService;
         _mapper = mapper;
+        _mediator = mediator;
     }
 
     public async Task<BookDto> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
@@ -20,8 +22,8 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, BookD
 
         if (bookToUpdate == null)
         {
-            // throw new NotFoundException("Book not found");
-            throw new Exception("Book not found");
+            await _mediator.Publish(new BookNotFoundEvent(request.BookId));
+            return null; // Or throw an exception
         }
 
         bookToUpdate.Title = request.Title;

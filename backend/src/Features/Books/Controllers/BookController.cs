@@ -115,7 +115,7 @@ namespace BookLibraryApi.Features.Books.Controllers
 
         //     return NoContent();
         // }
-        
+
         [HttpPut("{id}")]
         public async Task<ActionResult<BookDto>> UpdateBook(int id, UpdateBookCommand command)
         {
@@ -125,6 +125,11 @@ namespace BookLibraryApi.Features.Books.Controllers
             }
 
             var updatedBook = await _mediator.Send(command);
+            if (updatedBook == null)
+            {
+                return NotFound(); // Book not found, return 404
+            }
+
             return Ok(updatedBook);
         }
 
